@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import './index.css'
 import Axios from 'axios';
-// const api_url="https://rock-paper-scissor-89z8.onrender.com/users"
-const api_url="http://localhost:3000/";
+const api_url="https://rock-paper-scissor-89z8.onrender.com/users"
+// const api_url="http://localhost:3000/";
 
 function User() {
     const [name,setName] = useState("");
