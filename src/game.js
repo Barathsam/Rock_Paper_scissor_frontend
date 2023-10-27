@@ -19,6 +19,7 @@ function Game(){
     setUserChoice(value)    
     generateComputerChoice()
   }
+const api_url="https://rock-paper-scissor-89z8.onrender.com/users"
 
 let navigation = useNavigate();
 let logout = ()=> navigation("/");
@@ -32,10 +33,10 @@ let logout = ()=> navigation("/");
     window.location.reload()
   }
   async function computerwins(){
-    await Axios.post(`http://localhost:3002/users`,{name:location.state.name,status:"Computer Wins"})
+    await Axios.post(api_url,{name:location.state.name,status:"Computer Wins"})
   }
    async function userwins(){
-    await Axios.post(`http://localhost:3002/users`,{name:location.state.name,status:"User Wins"})
+    await Axios.post(api_url,{name:location.state.name,status:"User Wins"})
   }
 
   useEffect( () => {
