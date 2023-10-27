@@ -19,7 +19,8 @@ function Game(){
     setUserChoice(value)    
     generateComputerChoice()
   }
-const api_url="https://rock-paper-scissor-89z8.onrender.com/users"
+// const api_url="https://rock-paper-scissor-89z8.onrender.com/users"
+const api_url="http://localhost:3000/"
 
 let navigation = useNavigate();
 let logout = ()=> navigation("/");
@@ -41,13 +42,12 @@ let logout = ()=> navigation("/");
 
   useEffect( () => {
     const comboMoves = userChoice + computerChoice
-    if (userPoints <= 4 && computerPoints <= 4) {
       if (comboMoves === 'scissorspaper' || comboMoves === 'rockscissors' || comboMoves === 'paperrock') {
         // userPoints.current += 1
         const updatedUserPoints = userPoints + 1
         setUserPoints(updatedUserPoints)
         setTurnResult('User gets the point!')
-        if (updatedUserPoints === 5){
+        if (updatedUserPoints === 6){
           setResult('User Wins')
           userwins();
           const gameOff = true
@@ -60,7 +60,7 @@ let logout = ()=> navigation("/");
         const updatedComputerPoints = computerPoints + 1
         setComputerPoints(updatedComputerPoints)
         setTurnResult('Computer gets the point!')
-        if (updatedComputerPoints === 5) {
+        if (updatedComputerPoints === 6) {
           setResult('Computer Wins')
            computerwins();
           const gameOff = true
@@ -69,9 +69,27 @@ let logout = ()=> navigation("/");
       }
 
       if (comboMoves === 'paperpaper' || comboMoves === 'rockrock' || comboMoves === 'scissorsscissors') {
-        setTurnResult('No one gets a point!')
+        if(computerPoints != 0 || userPoints != 0 )
+        {
+          const updatedComputerPoints = computerPoints + 1
+          const updatedUserPoints = userPoints + 1
+          setComputerPoints(updatedComputerPoints)
+          setUserPoints(updatedUserPoints)
+          setTurnResult('Tie')
+          if (updatedComputerPoints === 6 ) {
+          setResult('Computer Wins')
+           computerwins();
+          const gameOff = true
+          setGameOver(gameOff)
+        }else if (updatedUserPoints === 6){
+            setResult('User Wins')
+            userwins();
+            const gameOff = true
+            setGameOver(gameOff)
+          }
+        }
       }
-    }
+    
   }, [computerChoice, userChoice])
 
   return (
